@@ -38,7 +38,7 @@ public class Main {
 		try {
 			contador = new ContadorPalabras();
 			contadorSigFich = new ContadorPalabrasSig();
-			contadorSigFich.leeFicheroNoSig("fichNoSig.txt", delimitadores);
+			contadorSigFich.leeFicheroNoSig("data/fichNoSig.txt", delimitadores);
 		} catch (IOException e) {
 			System.out.println("ERROR:"+ e.getMessage());
 		}
