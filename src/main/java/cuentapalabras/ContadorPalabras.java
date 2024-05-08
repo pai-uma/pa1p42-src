@@ -35,12 +35,8 @@ public class ContadorPalabras {
 		// El parámetro es de tipo String, pero los elementos almacenados en la lista son de
 		// tipo PalabraEnTexto. Por ello, se crea un objeto PalabraEnTexto con ese parámetro.
 		// Esto nos permtirá compararlo con equals con cada elemento de la lista.
-		PalabraEnTexto p = new PalabraEnTexto(pal);
-		int i = 0;
-		while ((i < palabras.size()) && ! p.equals(palabras.get(i))) {
-			++i;
-		}
-		return (i < palabras.size()) ? i : -1;
+		return palabras.indexOf(new PalabraEnTexto(pal));
+		
 	}
 	
 	/**
@@ -52,11 +48,11 @@ public class ContadorPalabras {
 	 * @return	Objeto PalabraEnTexto que contiene la palabra
 	 */
 	public PalabraEnTexto encuentra(String pal) {
-		int p = esta(pal);
-		if (p < 0) {
+		int pos = esta(pal);
+		if (pos < 0) {
 			throw new NoSuchElementException("No existe la palabra " + pal);
 		}
-		return palabras.get(p);
+		return palabras.get(pos);
 	}
 	
 	/**
@@ -70,11 +66,11 @@ public class ContadorPalabras {
 	 */
 	protected void incluye(String pal) {
 		if (pal.length() > 0) { // ignora si palabra vacia
-			int p = esta(pal);
-			if (p < 0) {
+			int pos = esta(pal);
+			if (pos < 0) {
 				palabras.add(new PalabraEnTexto(pal));
 			} else {
-				palabras.get(p).incrementa();
+				palabras.get(pos).incrementa();
 			}
 		}
 	}
