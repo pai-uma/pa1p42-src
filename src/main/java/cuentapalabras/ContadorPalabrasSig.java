@@ -37,9 +37,7 @@ public class ContadorPalabrasSig extends ContadorPalabras {
 	public void leeArrayNoSig(String[] palsNS) {
 		noSignificativas.clear();
 		for (String p : palsNS) {
-			if (p.length() > 0) { // ignora si vacio
-				noSignificativas.add(p.toUpperCase());
-			}
+			incluyeNoSig(p);
 		}
 	}
 	
@@ -94,9 +92,7 @@ public class ContadorPalabrasSig extends ContadorPalabras {
 	private void anyadePalabrasNoSignificativas(String linea, String sep) {
 		String[] pal = linea.split(sep);
 		for (String p : pal) {
-			if (p.length() > 0) { // ignora si vacio
-				noSignificativas.add(p.toUpperCase());
-			}
+			incluyeNoSig(p);
 		}
 	}
 	
@@ -111,18 +107,28 @@ public class ContadorPalabrasSig extends ContadorPalabras {
 		try (Scanner sc = new Scanner(linea)) {
 			sc.useDelimiter(sep);
 			while (sc.hasNext()) {
-				noSignificativas.add(sc.next().toUpperCase());
+				incluyeNoSig(sc.next());
 			}
 		}
 	}
+	
+	/**
+	 * Método privado que añade una palabra a la lista de palabras no
+	 * significativas. Si la palabra está vacía, entonces será ignorada.
+	 * 
+	 * @param pal Palabra que se añadirá
+	 */
+	private void incluyeNoSig(String pal) {
+        if (!pal.isEmpty()) {
+            noSignificativas.add(pal.toUpperCase());
+        }
+    }
 	
 	/**
 	 * Redefinición del método protegido incluye, que solo incluirá la palabra cuando sea significativa.
 	 */
 	@Override
 	protected void incluye(String pal) {
-		// int p = this.estaNoSig(pal);
-		// if (p < 0) {
 		if(!noSignificativas.contains(pal.toUpperCase()))
 			super.incluye(pal);
 	}
