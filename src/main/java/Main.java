@@ -12,7 +12,7 @@ public class Main {
 			"Por que ha pegado con la porra a la perra de Parra.",
 			"Porque si la perra de Parra no hubiera roto la jarra de Guerra,",
 			"Guerra no hubiera pegado con la porra a la perra de Parra."};
-		String delimitadores = "[ .,:;\\-\\!\\!\\?\\?]+"; // " .,:;-!!??" una o varias apariciones
+		String delimitadores = "[ .,:;\\-\\¡\\!\\¿\\?]+"; // " .,:;-¡!¿?" una o varias apariciones
 		String [] noSig = { "CON", "LA", "A", "DE", "NO", "SI", "Y", "UNA" };
 
         System.out.println("ContadorPalabras ...");
