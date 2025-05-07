@@ -25,21 +25,6 @@ public class ContadorPalabras {
 	}
 	
 	/**
-	 * Método que devuelve la posición que ocupa una palabra determinada
-	 * en la lista de palabras en texto. Si no se localiza devuelve -1.
-	 * 
-	 * @param pal	String con la palabra
-	 * @return	Posición de la palabra en la lista o -1 si no está
-	 */
-	private int esta(String pal) {
-		// El parámetro es de tipo String, pero los elementos almacenados en la lista son de
-		// tipo PalabraEnTexto. Por ello, se crea un objeto PalabraEnTexto con ese parámetro.
-		// Esto nos permtirá compararlo con equals con cada elemento de la lista.
-		return palabras.indexOf(new PalabraEnTexto(pal));
-		
-	}
-	
-	/**
 	 * Método que devuelve la instancia de PalabraEnTexto en la lista 
 	 * que coincide con ella y la devuelve. Si la palabra no se encuentra 
 	 * en el texto deberá lanzar la excepción NoSuchElementException.
@@ -47,8 +32,10 @@ public class ContadorPalabras {
 	 * @param pal	String con la palabra a encontrar
 	 * @return	Objeto PalabraEnTexto que contiene la palabra
 	 */
+	
 	public PalabraEnTexto encuentra(String pal) {
-		int pos = esta(pal);
+		PalabraEnTexto pet = new PalabraEnTexto(pal);
+		int pos = palabras.indexOf(pet);
 		if (pos < 0) {
 			throw new NoSuchElementException("No existe la palabra " + pal);
 		}
@@ -65,10 +52,11 @@ public class ContadorPalabras {
 	 * @param pal String con la palabra a incluir o incrementar
 	 */
 	protected void incluye(String pal) {
-		if (pal.length() > 0) { // ignora si palabra vacia
-			int pos = esta(pal);
+		if (!pal.isEmpty()) { // ignora si palabra vacia
+			PalabraEnTexto pet = new PalabraEnTexto(pal);
+			int pos = palabras.indexOf(pet);
 			if (pos < 0) {
-				palabras.add(new PalabraEnTexto(pal));
+				palabras.add(pet);
 			} else {
 				palabras.get(pos).incrementa();
 			}
@@ -95,7 +83,7 @@ public class ContadorPalabras {
 	 * Método con implementación alternativa (con Scanner) para incluir todas las 
 	 * palabras dadas en una cadena de caracteres.
 	 * 
-	 * @param linea	Strng con palabras separadas por delimitadores
+	 * @param linea	String con palabras separadas por delimitadores
 	 * @param del	Delimitadores que separan las palabras
 	 */
 	private void incluyeTodas_AlternativoConScanner(String linea, String del) {
